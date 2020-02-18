@@ -1,0 +1,240 @@
+{% extends 'base.html' %} {% block header %}
+<meta
+  name="viewport"
+  content="initial-scale=1,maximum-scale=1,user-scalable=no"
+/>
+
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+<link
+  href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"
+  rel="stylesheet"
+/>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #map {
+    /*position: absolute;
+    top: 0;
+    bottom: 0;*/
+    width: 100%;
+    height: 500px;
+  }
+</style>
+{% endblock header %} {% block content %}
+<form method="post">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="col m6 s12">
+          <div class="input-field">
+            <i class="material-icons prefix">location_on</i>
+            <input
+              type="text"
+              name="src"
+              id="src"
+              class="autocomplete"
+              required
+            />
+            <label for="src">Source</label>
+          </div>
+        </div>
+        <div class="col m6 s12">
+          <div class="input-field">
+            <i class="material-icons prefix">location_on</i>
+            <input
+              type="text"
+              name="dest"
+              id="dest"
+              class="autocomplete"
+              required
+            />
+            <label for="dest">Destination</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 center-align">
+          <button
+            class="btn waves-effect waves-light"
+            type="submit"
+            name="action"
+          >
+            Search
+            <i class="material-icons right">search</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div id="map"></div>
+
+{% endblock content %} {% block scripts %}
+<script>
+    // add the JavaScript here
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiYjMwd3VsZmZ6IiwiYSI6ImNrNmk0ajloeTMxODgzbW56anoxbGdvY24ifQ.FEssm4xWFRIduaK5vrtWzg";
+
+    var map = new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/mapbox/streets-v10",
+      center: [77.216721, 28.6448], // starting position
+      zoom: 12
+    });
+
+    const geolocate = new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    });
+    map.addControl(geolocate);
+    map.on("load", () => {
+      geolocate.trigger();
+    });
+
+    // initialize the map canvas to interact with later
+    var canvas = map.getCanvasContainer();
+
+    // this is where the code for the next step will go
+    map.on("click", e => {
+      console.log(e.lngLat.lng);
+      map.setCenter(e.lngLat);
+    });
+
+    {% if srcObj is not None and destObj is not None %}
+
+
+    function getRoute() {
+    // make a directions request using cycling profile
+    // an arbitrary start will always be the same
+    // only the end or destination will change
+     start = [{{srcObj.0.fields.lng}}, {{srcObj.0.fields.lat}}]
+     end = [{{destObj.0.fields.lng}}, {{destObj.0.fields.lat}}]
+
+    map.addLayer({
+      id: 'point',
+      type: 'circle',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [{
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'Point',
+              coordinates: start
+            }
+          }
+          ]
+        }
+      },
+      paint: {
+        'circle-radius': 10,
+        'circle-color': '#F49F0A'
+      }
+    });
+
+    map.addLayer({
+      id: 'end',
+      type: 'circle',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [{
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'Point',
+              coordinates: end
+            }
+          }
+          ]
+        }
+      },
+      paint: {
+        'circle-radius': 10,
+        'circle-color': '#41EAD4'
+      }
+    });
+
+
+    var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+
+    // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+    var req = new XMLHttpRequest();
+    req.open('GET', url, true);
+    req.onload = function() {
+      var json = JSON.parse(req.response);
+      var data = json.routes[0];
+      var route = data.geometry.coordinates;
+      var geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route
+        }
+      };
+
+      // if the route already exists on the map, reset it using setData
+      if (map.getSource('route')) {
+        map.getSource('route').setData(geojson);
+      } else { // otherwise, make a new request
+        map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: geojson
+              }
+            }
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#3887be',
+            'line-width': 5,
+            'line-opacity': 0.75
+          }
+        });
+      }
+      // add turn instructions here at the end
+    };
+    req.send();
+  }
+
+  map.on('load', function() {
+    getRoute();
+    getRoute();
+  });
+
+    {% endif %}
+</script>
+
+<script>
+  jsonObj = {}
+  {% for loc in data %}
+    jsonObj["{{ loc.fields.name }}"] = null
+  {% endfor %}
+
+  $(document).ready(function() {
+    $("input.autocomplete").autocomplete({
+      data: jsonObj
+    });
+  });
+</script>
+{% endblock scripts %}
