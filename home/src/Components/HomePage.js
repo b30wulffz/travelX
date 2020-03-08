@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactLoading from "react-loading";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
+import Anime from "react-anime";
 
 const HomePage = () => {
   //   const [load, setLoad] = useState({
