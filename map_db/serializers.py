@@ -12,5 +12,4 @@ class LocationSerializer(serializers.ModelSerializer):
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Route
-        fields = ('id', 'src_id', 'dest_id',
-                  'mode', 'price')
+        fields = '__all__'

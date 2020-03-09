@@ -8,6 +8,7 @@ import Anime from "react-anime";
 
 import HomePage from "./HomePage";
 import AddForm from "./AddForm";
+import AddRoute from "./AddRoute";
 
 // import * as cuteLoader from "../../assets/loader/1016-spirit-geek.json";
 // import * as cuteLoader from "../../assets/loader/11422-travel-icons-map.json";
@@ -54,6 +55,7 @@ const App = () => {
       <div>
         <Link to="/">Home</Link>
         <Link to="/add">Add</Link>
+        <Link to="/addRoute">AddRoute</Link>
         <Link to="/search">Search</Link>
       </div>
       <Switch>
@@ -77,14 +79,25 @@ const App = () => {
             )}
           </div>
         </Route>
-        <Route path="/add">
+        <Route exact path="/add">
           {/* <Anime opacity={[0, 1]} translateX={["100vw", 0]}> */}
           <FadeIn>
             <AddForm />
           </FadeIn>
           {/* </Anime> */}
         </Route>
-        <Route path="/search"></Route>
+        <Route exact path="/addRoute">
+          {/* <Anime opacity={[0, 1]} translateX={["100vw", 0]}> */}
+          <FadeIn>
+            <AddRoute />
+          </FadeIn>
+          {/* </Anime> */}
+        </Route>
+        <Route exact path="/search">
+          <FadeIn>
+            <SearchForm />
+          </FadeIn>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

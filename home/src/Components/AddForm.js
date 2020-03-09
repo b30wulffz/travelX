@@ -293,7 +293,7 @@ const Map = () => {
           mapboxApiAccessToken={TOKEN}
           mapStyle="mapbox://styles/b30wulffz/ck77ua3ax0yt81ioers9qxmn0"
           onViewportChange={_onViewportChange}
-          maxZoom={10}
+          maxZoom={20}
           style={{ position: "relative" }}
           onClick={e => {
             getCoordinates(e);

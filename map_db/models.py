@@ -1,5 +1,7 @@
 
 from django.db import models
+from django.core.validators import MinValueValidator
+from decimal import Decimal
 
 
 class Location(models.Model):
@@ -19,9 +21,15 @@ class Route(models.Model):
         'Location', on_delete=models.CASCADE, related_name='tranports_from')
     dest_id = models.ForeignKey(
         'Location', on_delete=models.CASCADE, related_name='tranports_to')
-    mode = models.CharField(max_length=1)
+    # mode = models.CharField(max_length=1)
     distance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    price = models.PositiveIntegerField()
+    # price = models.PositiveIntegerField()
+    autoPrice = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.0, validators=[MinValueValidator(Decimal('0.0'))])
+    busPrice = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.0, validators=[MinValueValidator(Decimal('0.0'))])
+    trainPrice = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.0, validators=[MinValueValidator(Decimal('0.0'))])
 
     def __str__(self):
         return str(self.id)+": " + self.source_place + " to " + self.dest_place
