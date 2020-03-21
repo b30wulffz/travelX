@@ -3,6 +3,7 @@ import ReactLoading from "react-loading";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import Anime from "react-anime";
+import { Icon } from "react-materialize";
 
 const HomePage = () => {
   //   const [load, setLoad] = useState({
@@ -17,8 +18,19 @@ const HomePage = () => {
   //   }, []);
 
   return (
-    <div className={"home done"}>
-      <FadeIn>Welcome to travelX!</FadeIn>
+    <div className={"home"}>
+      {/* <FadeIn>Welcome to travelX!</FadeIn> */}
+      <div className={"title"}>
+        Welcome to <span className={"logo"}>travelX!</span>
+      </div>
+      <div className={"tagline"}>
+        {/* Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum! */}
+        <div className={"continue"}>
+          {/* Continue */}
+          <Icon size={50}>navigate_next</Icon>
+        </div>
+      </div>
+      {/* Lorem Ipsum */}
     </div>
   );
 };

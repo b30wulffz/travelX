@@ -1,0 +1,35 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1fa2ff;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: #8ac4ff;
+      }
+
+      .cls-4 {
+        fill: #a6ffcb;
+      }
+
+      .cls-5 {
+        fill: #adbdff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="1775" y1="441.5" x2="2160" y2="441.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0.11" stop-color="#8de4ff"/>
+      <stop offset="0.98" stop-color="#34e5ff"/>
+    </linearGradient>
+  </defs>
+  <title>background</title>
+  <path class="cls-1" d="M1112.5-.5c35.82,33.92,93.13,80.78,173,116C1406,168.64,1487,155.17,1593.15,179.07c83.62,18.83,199.67,64.61,327.35,187.43q-.49-183.49-1-367Z"/>
+  <circle class="cls-2" cx="1967.5" cy="441.5" r="192.5"/>
+  <path class="cls-3" d="M1920.5,366.5l-.3-111.64a192,192,0,0,0-80.33,42.55A890.78,890.78,0,0,1,1920.5,366.5Z"/>
+  <circle class="cls-4" cx="347" cy="1246" r="322"/>
+  <circle class="cls-5" cx="1823" cy="709" r="57"/>
+</svg>

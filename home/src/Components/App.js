@@ -43,7 +43,7 @@ const App = () => {
 
   return !load.loaded ? (
     // <Example type="bubbles" color="red" />
-    <div className="home">
+    <div className="loading">
       <FadeIn>
         <div className="loader">
           <Lottie options={defaultOptions} height={220} width={220} />
@@ -52,16 +52,18 @@ const App = () => {
     </div>
   ) : (
     <BrowserRouter>
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/add">Add</Link>
-        <Link to="/addRoute">AddRoute</Link>
-        <Link to="/search">Search</Link>
-      </div>
-      <Switch>
-        <Route exact path="/">
-          <div className={"home " + load.currClass}>
-            {/* {!load.loaded ? (
+      <div className="homePage">
+        <div className="navBar">
+          <Link to="/">Home</Link>
+          <Link to="/add">Add</Link>
+          <Link to="/addRoute">AddRoute</Link>
+          <Link to="/search">Search</Link>
+        </div>
+        <div className="showPage">
+          <Switch>
+            <Route exact path="/">
+              {/* <div className={"home " + load.currClass}> */}
+              {/* {!load.loaded ? (
               // <Example type="bubbles" color="red" />
               <FadeIn>
                 <div className="loader">
@@ -69,36 +71,47 @@ const App = () => {
                 </div>
               </FadeIn>
             ) : ( */}
-            <FadeIn>
-              <Anime opacity={[0, 1]} translateX={["100vw", 0]}>
-                <HomePage />
+              <FadeIn>
+                <div>
+                  {/* <Anime
+                opacity={[0, 1]}
+                translateX={["100vw", 0]}
+                easing
+                duration={3000}
+              > */}
+                  <HomePage />
+                  {/* </Anime> */}
+                  {/* <Form /> */}
+                  {/* <div className="loadedText">Loaded</div> */}
+                </div>
+              </FadeIn>
+              {/* )}s */}
+              {/* </div> */}
+            </Route>
+            <Route exact path="/add">
+              <Anime opacity={[0, 1]} duration={2000}>
+                {/* <FadeIn> */}
+                <AddForm />
+                {/* </FadeIn> */}
               </Anime>
-              {/* <Form /> */}
-              {/* <div className="loadedText">Loaded</div> */}
-            </FadeIn>
-            )}
-          </div>
-        </Route>
-        <Route exact path="/add">
-          {/* <Anime opacity={[0, 1]} translateX={["100vw", 0]}> */}
-          <FadeIn>
-            <AddForm />
-          </FadeIn>
-          {/* </Anime> */}
-        </Route>
-        <Route exact path="/addRoute">
-          {/* <Anime opacity={[0, 1]} translateX={["100vw", 0]}> */}
-          <FadeIn>
-            <AddRoute />
-          </FadeIn>
-          {/* </Anime> */}
-        </Route>
-        <Route exact path="/search">
-          <FadeIn>
-            <SearchForm />
-          </FadeIn>
-        </Route>
-      </Switch>
+            </Route>
+            <Route exact path="/addRoute">
+              <Anime opacity={[0, 1]} translateX={["100vw", 0]}>
+                {/* <FadeIn> */}
+                <AddRoute />
+                {/* </FadeIn> */}
+              </Anime>
+            </Route>
+            <Route exact path="/search">
+              <Anime opacity={[0, 1]} translateX={["-100vw", 0]}>
+                {/* <FadeIn> */}
+                <SearchForm />
+                {/* </FadeIn> */}
+              </Anime>
+            </Route>
+          </Switch>
+        </div>
+      </div>
     </BrowserRouter>
   );
   // <div className={"home " + load.currClass}>

@@ -42,6 +42,8 @@ const SearchForm = () => {
   const [notFound, setNotFound] = useState(false);
   const [points, setPoints] = useState([]);
 
+  const [test, setTest] = useState("Default");
+
   useEffect(() => {
     const urlLocations = "/api/location/";
     const urlRoutes = "/api/routes/";
@@ -199,7 +201,7 @@ const SearchForm = () => {
               // onChange={(event, value) => setSrc(value)}
             />
           </Row>
-          <Row>
+          {/* <Row>
             <Autocomplete
               options={{
                 data: locMap,
@@ -210,6 +212,25 @@ const SearchForm = () => {
                 limit: 5
               }}
               title="Destination"
+              // value={dest}
+              // style={{ width: "100vw" }}
+              // value={dest}
+              // onChange={(event, value) => setDest(value)}
+            />
+          </Row> */}
+          <Row>
+            <Autocomplete
+              // options={{
+              //   data: locMap,
+              //   onAutocomplete: value => {
+              //     // console.log(value);
+              //     setDest(locations.find(x => x.place == value));
+              //   },
+              //   limit: 5,
+
+              // }}
+              title="Destination"
+              value={test}
               // value={dest}
               // style={{ width: "100vw" }}
               // value={dest}
