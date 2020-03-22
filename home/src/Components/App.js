@@ -89,25 +89,36 @@ const App = () => {
               {/* </div> */}
             </Route>
             <Route exact path="/add">
-              <Anime opacity={[0, 1]} duration={2000}>
-                {/* <FadeIn> */}
-                <AddForm />
-                {/* </FadeIn> */}
-              </Anime>
+              {/* <Anime opacity={[0, 1]} duration={2000}> */}
+              <FadeIn>
+                <div>
+                  <AddForm />
+                </div>
+              </FadeIn>
+              {/* </Anime> */}
             </Route>
             <Route exact path="/addRoute">
-              <Anime opacity={[0, 1]} translateX={["100vw", 0]}>
-                {/* <FadeIn> */}
-                <AddRoute />
-                {/* </FadeIn> */}
-              </Anime>
+              {/* <Anime opacity={[0, 1]} translateX={["100vw", 0]}> */}
+              <FadeIn>
+                <div>
+                  <AddRoute />
+                </div>
+              </FadeIn>
+              {/* </Anime> */}
             </Route>
             <Route exact path="/search">
-              <Anime opacity={[0, 1]} translateX={["-100vw", 0]}>
-                {/* <FadeIn> */}
-                <SearchForm />
-                {/* </FadeIn> */}
-              </Anime>
+              {/* <Anime opacity={[0, 1]} translateX={["-100vw", 0]}> */}
+              <FadeIn>
+                <div>
+                  <SearchForm />
+                </div>
+              </FadeIn>
+              {/* </Anime> */}
+            </Route>
+            <Route>
+              <FadeIn>
+                <div>Not Found</div>
+              </FadeIn>
             </Route>
           </Switch>
         </div>
