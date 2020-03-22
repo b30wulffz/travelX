@@ -26,8 +26,8 @@ const mapRef = React.createRef();
 
 const SearchForm = () => {
   const [viewport, setViewPort] = useState({
-    width: "100%",
-    height: "90vh",
+    width: "80%",
+    height: "60vh",
     zoom: 6,
     latitude: 0,
     longitude: 0
@@ -267,7 +267,7 @@ const SearchForm = () => {
             </Row>
           ) : null}
         </Col>
-        <Col s={12} m={8}>
+        <Col s={12} m={8} className="mapOutline">
           {/* <DeckGL {...viewport} layers={[layer]}> */}
           {/* <DeckGL initialViewState={initialViewState} layers={layers}> */}
           {/* <DeckGL

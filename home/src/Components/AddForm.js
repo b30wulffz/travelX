@@ -41,8 +41,8 @@ const mapRef = React.createRef();
 
 const Map = () => {
   const [viewport, setViewPort] = useState({
-    width: "100%",
-    height: "90vh",
+    width: "80%",
+    height: "60vh",
     zoom: 6,
     latitude: 0,
     longitude: 0

@@ -71,54 +71,52 @@ const App = () => {
                 </div>
               </FadeIn>
             ) : ( */}
-              <FadeIn>
-                <div>
-                  {/* <Anime
+              <FadeIn delay={500}>
+                {/* <div> */}
+                {/* <Anime
                 opacity={[0, 1]}
                 translateX={["100vw", 0]}
                 easing
                 duration={3000}
               > */}
-                  <HomePage />
-                  {/* </Anime> */}
-                  {/* <Form /> */}
-                  {/* <div className="loadedText">Loaded</div> */}
-                </div>
+                <HomePage />
+                {/* </Anime> */}
+                {/* <Form /> */}
+                {/* <div className="loadedText">Loaded</div> */}
+                {/* </div> */}
               </FadeIn>
               {/* )}s */}
               {/* </div> */}
             </Route>
             <Route exact path="/add">
               {/* <Anime opacity={[0, 1]} duration={2000}> */}
-              <FadeIn>
-                <div>
-                  <AddForm />
-                </div>
-              </FadeIn>
+              {/* <FadeIn> */}
+              {/* <div> */}
+              <AddForm />
+              {/* </div> */}
+              {/* </FadeIn> */}
               {/* </Anime> */}
             </Route>
             <Route exact path="/addRoute">
               {/* <Anime opacity={[0, 1]} translateX={["100vw", 0]}> */}
               <FadeIn>
-                <div>
-                  <AddRoute />
-                </div>
+                {/* <div> */}
+                <AddRoute />
+                {/* </div> */}
               </FadeIn>
               {/* </Anime> */}
             </Route>
             <Route exact path="/search">
               {/* <Anime opacity={[0, 1]} translateX={["-100vw", 0]}> */}
-              <FadeIn>
-                <div>
-                  <SearchForm />
-                </div>
-              </FadeIn>
+              {/* <FadeIn style={{ width: "100%" }}> */}
+              {/* <div> */}
+              <SearchForm />
+              {/* </div> */}
+              {/* </FadeIn> */}
               {/* </Anime> */}
             </Route>
             <Route>
-              <FadeIn>
-                <div>Not Found</div>
-              </FadeIn>
+              <FadeIn>Not Found</FadeIn>
             </Route>
           </Switch>
         </div>

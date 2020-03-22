@@ -4,6 +4,7 @@ import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import Anime from "react-anime";
 import { Icon } from "react-materialize";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   //   const [load, setLoad] = useState({
@@ -25,10 +26,13 @@ const HomePage = () => {
       </div>
       <div className={"tagline"}>
         {/* Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum! */}
-        <div className={"continue"}>
-          {/* Continue */}
-          <Icon size={50}>navigate_next</Icon>
-        </div>
+
+        <Link to="/search">
+          <div className={"continue"}>
+            {/* Continue */}
+            <Icon size={50}>navigate_next</Icon>
+          </div>
+        </Link>
       </div>
       {/* Lorem Ipsum */}
     </div>

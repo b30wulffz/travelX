@@ -1,14 +1,14 @@
-.xs {
-  /* background-image: url("background.jpg"); */
-  /* background-image: url("https://i.imgur.com/uJYAryR.jpg"); */
-  /* background-image: url("https://www.pixelstalk.net/wp-content/uploads/images2/Minimalist-Abstract_arrows-wallpaper-2560x1600.jpg"); */
-  /* background-image: url("https://www.mewallpaper.com/thumbnail/abstract/6031-top-view-photo-of-keyboard-and-earphones-free-photo-wallpaper.jpg");
+/* .xs { */
+/* background-image: url("background.jpg"); */
+/* background-image: url("https://i.imgur.com/uJYAryR.jpg"); */
+/* background-image: url("https://www.pixelstalk.net/wp-content/uploads/images2/Minimalist-Abstract_arrows-wallpaper-2560x1600.jpg"); */
+/* background-image: url("https://www.mewallpaper.com/thumbnail/abstract/6031-top-view-photo-of-keyboard-and-earphones-free-photo-wallpaper.jpg");
   background-image: url("https://365wallpapers.files.wordpress.com/2009/02/minimal-g.png"); */
-  /* background-image: url("https://i.imgur.com/vuL2Iwl.jpg"); */
-  background-image: url("https://i.ibb.co/bvTVSjj/test-01.jpg");
+/* background-image: url("https://i.imgur.com/vuL2Iwl.jpg"); */
+/* background-image: url("https://i.ibb.co/bvTVSjj/test-01.jpg");
   background-position: center;
   background-size: cover;
-}
+} */
 
 .homePage {
   /* background-image: url("background.jpg"); */
@@ -17,7 +17,8 @@
   /* background-image: url("https://www.mewallpaper.com/thumbnail/abstract/6031-top-view-photo-of-keyboard-and-earphones-free-photo-wallpaper.jpg");
   background-image: url("https://365wallpapers.files.wordpress.com/2009/02/minimal-g.png"); */
   /* background-image: url("https://i.imgur.com/vuL2Iwl.jpg"); */
-  background-image: url("https://i.ibb.co/bvTVSjj/test-01.jpg");
+  /* background-image: url("https://i.ibb.co/bvTVSjj/test-01.jpg"); */
+  background: url(backgroundHQ.jpg);
   background-position: center;
   background-size: cover;
 }
@@ -105,14 +106,16 @@
   flex: 5;
 }
 
-.showPage > div {
+/* .showPage > div { */
+.showPage {
   display: flex;
   /*width: 100%;*/
   align-items: center;
   justify-content: center;
   /* margin-top: auto;
   margin-bottom: auto; */
-  height: 100vh;
+  height: 80vh;
+  width: 100%;
 }
 /* 
 .showPage > div {
@@ -170,3 +173,7 @@
   cursor: pointer;
   color: white;
 }
+
+/* .mapOutline > div { */
+/* width: 500px; */
+/* } */
