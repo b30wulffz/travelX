@@ -114,7 +114,7 @@
   justify-content: center;
   /* margin-top: auto;
   margin-bottom: auto; */
-  height: 80vh;
+  height: 100vh;
   width: 100%;
 }
 /* 
@@ -177,3 +177,7 @@
 /* .mapOutline > div { */
 /* width: 500px; */
 /* } */
+
+.showPage > .row {
+  width: 100%;
+}
