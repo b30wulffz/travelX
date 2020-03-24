@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Autocomplete, Button, Icon } from "react-materialize";
+import {
+  Row,
+  Col,
+  Card,
+  Autocomplete,
+  Button,
+  Icon,
+  CardPanel
+} from "react-materialize";
 import axios from "axios";
 import FadeIn from "react-fade-in";
 import config from "../../assets/config";
@@ -15,6 +23,12 @@ import MapGL, {
 
 import PolyLineOverlay from "./PolyLineOverlay";
 
+import ReactLoading from "react-loading";
+
+const Example = ({ type, color }) => (
+  <ReactLoading type={type} color={color} height={50} width={50} />
+);
+
 const TOKEN = config.ACCESS_TOKEN;
 
 const geolocateStyle = {
@@ -26,8 +40,8 @@ const mapRef = React.createRef();
 
 const SearchForm = () => {
   const [viewport, setViewPort] = useState({
-    width: "80%",
-    height: "60vh",
+    width: "100%",
+    height: "50vh",
     zoom: 6,
     latitude: 0,
     longitude: 0
@@ -183,42 +197,47 @@ const SearchForm = () => {
     }
 
     return (
-      <Row>
-        <Col s={12} m={4}>
+      <CardPanel className="cardContent">
+        <Row>
           <Row>
-            <Autocomplete
-              options={{
-                data: locMap,
-                onAutocomplete: value => {
-                  // console.log(value);
-                  setSrc(locations.find(x => x.place == value));
-                },
-                limit: 5
-              }}
-              title="Source"
-              // value={src}
-              // style={{ width: "100vw" }}
-              // onChange={(event, value) => setSrc(value)}
-            />
+            <h3 className="pageHeading">Get The Price</h3>
           </Row>
-          {/* <Row>
-            <Autocomplete
-              options={{
-                data: locMap,
-                onAutocomplete: value => {
-                  // console.log(value);
-                  setDest(locations.find(x => x.place == value));
-                },
-                limit: 5
-              }}
-              title="Destination"
-              // value={dest}
-              // style={{ width: "100vw" }}
-              // value={dest}
-              // onChange={(event, value) => setDest(value)}
-            />
-          </Row> */}
           <Row>
+            <Col s={12} m={4}>
+              <Row>
+                <Autocomplete
+                  options={{
+                    data: locMap,
+                    onAutocomplete: value => {
+                      // console.log(value);
+                      setSrc(locations.find(x => x.place == value));
+                    },
+                    limit: 5
+                  }}
+                  title="Source"
+                  // value={src}
+                  // style={{ width: "100vw" }}
+                  // onChange={(event, value) => setSrc(value)}
+                />
+              </Row>
+              <Row>
+                <Autocomplete
+                  options={{
+                    data: locMap,
+                    onAutocomplete: value => {
+                      // console.log(value);
+                      setDest(locations.find(x => x.place == value));
+                    },
+                    limit: 5
+                  }}
+                  title="Destination"
+                  // value={dest}
+                  // style={{ width: "100vw" }}
+                  // value={dest}
+                  // onChange={(event, value) => setDest(value)}
+                />
+              </Row>
+              {/* <Row>
             <Autocomplete
               // options={{
               //   data: locMap,
@@ -236,41 +255,42 @@ const SearchForm = () => {
               // value={dest}
               // onChange={(event, value) => setDest(value)}
             />
-          </Row>
-          <Row>
-            <Button
-              node="button"
-              type="submit"
-              waves="light"
-              onClick={submitData}
-            >
-              Submit
-              <Icon right>send</Icon>
-            </Button>
-          </Row>
-          {notFound ? (
-            <Row>
-              <FadeIn>
-                <Card title="Error" className="red white-text">
-                  Not Found
-                </Card>
-              </FadeIn>
-            </Row>
-          ) : null}
-          {trans && !notFound ? (
-            <Row>
-              <FadeIn>
-                <Card title="Auto">Rs. {trans.autoPrice}</Card>
-                <Card title="Bus">Rs. {trans.busPrice}</Card>
-                <Card title="Train">Rs. {trans.trainPrice}</Card>
-              </FadeIn>
-            </Row>
-          ) : null}
-        </Col>
-        <Col s={12} m={8} className="mapOutline">
-          {/* <DeckGL {...viewport} layers={[layer]}> */}
-          {/* <DeckGL initialViewState={initialViewState} layers={layers}> */}
-          {/* <DeckGL
+          </Row> */}
+              <Row>
+                <Button
+                  node="button"
+                  type="submit"
+                  waves="light"
+                  onClick={submitData}
+                  className="submitBut"
+                >
+                  Search
+                  <Icon right>send</Icon>
+                </Button>
+              </Row>
+              {notFound ? (
+                <Row>
+                  <FadeIn>
+                    <Card title="Error" className="red white-text">
+                      Not Found
+                    </Card>
+                  </FadeIn>
+                </Row>
+              ) : null}
+              {trans && !notFound ? (
+                <Row>
+                  <FadeIn>
+                    <Card title="Auto">Rs. {trans.autoPrice}</Card>
+                    <Card title="Bus">Rs. {trans.busPrice}</Card>
+                    <Card title="Train">Rs. {trans.trainPrice}</Card>
+                  </FadeIn>
+                </Row>
+              ) : null}
+            </Col>
+            <Col s={12} m={8} className="mapOutline">
+              {/* <DeckGL {...viewport} layers={[layer]}> */}
+              {/* <DeckGL initialViewState={initialViewState} layers={layers}> */}
+              {/* <DeckGL
             initialViewState={{
               longitude: -122.41669,
               latitude: 37.7853,
@@ -281,36 +301,42 @@ const SearchForm = () => {
             controller={true}
             layers={layers}
           > */}
-          <MapGL
-            {...viewport}
-            // transitionInterpolator={new FlyToInterpolator({ speed: 4 })}
-            // transitionDuration="auto"
-            mapboxApiAccessToken={TOKEN}
-            mapStyle="mapbox://styles/b30wulffz/ck77ua3ax0yt81ioers9qxmn0"
-            onViewportChange={_onViewportChange}
-            maxZoom={20}
-            style={{ position: "relative" }}
-            // onClick={e => {
-            //   getCoordinates(e);
-            // }}
-            ref={mapRef}
-          >
-            <PolyLineOverlay points={points} />
-            <GeolocateControl
-              style={geolocateStyle}
-              positionOptions={{ enableHighAccuracy: true }}
-              trackUserLocation={true}
-            />
-            <div style={{ position: "absolute", right: 0, margin: "20px" }}>
-              <NavigationControl showCompass={false} />
-            </div>
-          </MapGL>
-          {/* </DeckGL> */}
-        </Col>
-      </Row>
+              <MapGL
+                {...viewport}
+                // transitionInterpolator={new FlyToInterpolator({ speed: 4 })}
+                // transitionDuration="auto"
+                mapboxApiAccessToken={TOKEN}
+                mapStyle="mapbox://styles/b30wulffz/ck77ua3ax0yt81ioers9qxmn0"
+                onViewportChange={_onViewportChange}
+                maxZoom={20}
+                style={{ position: "relative" }}
+                // onClick={e => {
+                //   getCoordinates(e);
+                // }}
+                ref={mapRef}
+              >
+                <PolyLineOverlay points={points} />
+                <GeolocateControl
+                  style={geolocateStyle}
+                  positionOptions={{ enableHighAccuracy: true }}
+                  trackUserLocation={true}
+                />
+                <div style={{ position: "absolute", right: 0, margin: "20px" }}>
+                  <NavigationControl showCompass={false} />
+                </div>
+              </MapGL>
+              {/* </DeckGL> */}
+            </Col>
+          </Row>
+        </Row>
+      </CardPanel>
     );
   } else {
-    return <div>Loading</div>;
+    return (
+      <div>
+        <Example type="spin" color="#1fa2ff" />
+      </div>
+    );
   }
 };
 

@@ -3,7 +3,7 @@ import { render } from "react-dom";
 // import ReactLoading from "react-loading";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
 import Anime from "react-anime";
 
 import HomePage from "./HomePage";
@@ -11,8 +11,8 @@ import AddForm from "./AddForm";
 import AddRoute from "./AddRoute";
 
 // import * as cuteLoader from "../../assets/loader/1016-spirit-geek.json";
-// import * as cuteLoader from "../../assets/loader/11422-travel-icons-map.json";
-import * as cuteLoader from "../../assets/loader/11562-van-icon.json";
+import * as cuteLoader from "../../assets/loader/11422-travel-icons-map.json";
+// import * as cuteLoader from "../../assets/loader/11562-van-icon.json";
 import Form from "./AddForm";
 import SearchForm from "./SearchForm";
 
@@ -38,7 +38,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoad({ loaded: true, currClass: "done" });
-    }, 3000);
+    }, 2000);
   }, []);
 
   return !load.loaded ? (
@@ -54,10 +54,18 @@ const App = () => {
     <BrowserRouter>
       <div className="homePage">
         <div className="navBar">
-          <Link to="/">Home</Link>
-          <Link to="/add">Add</Link>
-          <Link to="/addRoute">AddRoute</Link>
-          <Link to="/search">Search</Link>
+          <NavLink to="/" exact activeClassName="selectedTab">
+            Home
+          </NavLink>
+          <NavLink to="/search" exact activeClassName="selectedTab">
+            Search
+          </NavLink>
+          <NavLink to="/add" exact activeClassName="selectedTab">
+            Add Location
+          </NavLink>
+          <NavLink to="/addRoute" exact activeClassName="selectedTab">
+            Add Routes
+          </NavLink>
         </div>
         <div className="showPage">
           <Switch>
@@ -71,7 +79,7 @@ const App = () => {
                 </div>
               </FadeIn>
             ) : ( */}
-              <FadeIn delay={500}>
+              <FadeIn>
                 {/* <div> */}
                 {/* <Anime
                 opacity={[0, 1]}
@@ -99,11 +107,11 @@ const App = () => {
             </Route>
             <Route exact path="/addRoute">
               {/* <Anime opacity={[0, 1]} translateX={["100vw", 0]}> */}
-              <FadeIn>
-                {/* <div> */}
-                <AddRoute />
-                {/* </div> */}
-              </FadeIn>
+              {/* <FadeIn> */}
+              {/* <div> */}
+              <AddRoute />
+              {/* </div> */}
+              {/* </FadeIn> */}
               {/* </Anime> */}
             </Route>
             <Route exact path="/search">
@@ -116,7 +124,11 @@ const App = () => {
               {/* </Anime> */}
             </Route>
             <Route>
-              <FadeIn>Not Found</FadeIn>
+              <FadeIn>
+                <div className={"errorTitle"}>
+                  Error 404 - <span className={"logo"}>Not Found</span>
+                </div>
+              </FadeIn>
             </Route>
           </Switch>
         </div>

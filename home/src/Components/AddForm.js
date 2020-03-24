@@ -11,12 +11,13 @@ import Geocoder from "react-mapbox-gl-geocoder";
 import {
   Row,
   Col,
-  CardPanel,
+  Card,
   TextInput,
   Button,
   Icon,
   Divider,
-  Textarea
+  Textarea,
+  CardPanel
 } from "react-materialize";
 import FadeIn from "react-fade-in";
 
@@ -41,8 +42,8 @@ const mapRef = React.createRef();
 
 const Map = () => {
   const [viewport, setViewPort] = useState({
-    width: "80%",
-    height: "60vh",
+    width: "100%",
+    height: "50vh",
     zoom: 6,
     latitude: 0,
     longitude: 0
@@ -214,199 +215,223 @@ const Map = () => {
   console.log(clusters);
 
   return (
-    <Row>
-      <Col s={12} m={4}>
-        {err ? (
+    <CardPanel className="cardContent">
+      <Row>
+        <Row>
+          <h3 className="pageHeading">Add New Location</h3>
+        </Row>
+        <Row>
+          <Col s={12} m={4}>
+            {/* {err ? (
           <Row>
-            <FadeIn>Error</FadeIn>
+            <FadeIn>
+              <Card title="Error" className="red white-text">
+                Not Uploaded!
+              </Card>
+            </FadeIn>
           </Row>
         ) : null}
 
         {success ? (
           <Row>
-            <FadeIn>Success</FadeIn>
+            <FadeIn>
+              <Card title="Success" className="green white-text">
+                Location Added Successfully!
+              </Card>
+            </FadeIn>
           </Row>
-        ) : null}
+        ) : null} */}
 
-        <Row>
-          <TextInput
-            label="Source"
-            value={source.place}
-            onChange={e => setSource({ ...source, place: e.target.value })}
-          />
-        </Row>
-        <Row>
-          <TextInput
-            label="Latitude"
-            type="number"
-            value={source.latitude}
-            onChange={e =>
-              setSource({
-                ...source,
-                latitude: Number(e.target.value.toFixed(7))
-              })
-            }
-          />
-        </Row>
-        <Row>
-          <TextInput
-            label="Longitude"
-            type="number"
-            value={source.longitude}
-            onChange={e =>
-              setSource({
-                ...source,
-                longitude: Number(e.target.value.toFixed(7))
-              })
-            }
-          />
-        </Row>
-        <Row>
-          <Textarea
-            label="Summary"
-            value={source.summary}
-            onChange={e => setSource({ ...source, summary: e.target.value })}
-          />
-        </Row>
-        <Row>
-          <TextInput
-            label="File"
-            type="file"
-            // value={source.place_img == "" ? "" : source.place_img.name}
-            onChange={e =>
-              setSource({ ...source, place_img: e.target.files[0] })
-            }
-          />
-        </Row>
-        <Row>
-          <Button node="button" waves="light" onClick={submitData}>
-            Submit
-            <Icon right>send</Icon>
-          </Button>
-        </Row>
-      </Col>
-      <Col s={12} m={8}>
-        <MapGL
-          {...viewport}
-          // transitionInterpolator={new FlyToInterpolator({ speed: 4 })}
-          // transitionDuration="auto"
-          mapboxApiAccessToken={TOKEN}
-          mapStyle="mapbox://styles/b30wulffz/ck77ua3ax0yt81ioers9qxmn0"
-          onViewportChange={_onViewportChange}
-          maxZoom={20}
-          style={{ position: "relative" }}
-          onClick={e => {
-            getCoordinates(e);
-          }}
-          ref={mapRef}
-        >
-          <GeolocateControl
-            style={geolocateStyle}
-            positionOptions={{ enableHighAccuracy: true }}
-            trackUserLocation={true}
-          />
-          <div style={{ position: "absolute", right: 0, margin: "20px" }}>
-            <NavigationControl showCompass={false} />
-          </div>
-
-          {clusters.map(cluster => {
-            const [longitude, latitude] = cluster.geometry.coordinates;
-            const {
-              cluster: isCluster,
-              point_count: pointCount
-            } = cluster.properties;
-
-            if (isCluster) {
-              return (
-                <Marker
-                  key={cluster.id}
-                  latitude={latitude}
-                  longitude={longitude}
-                >
-                  <div
-                    style={{
-                      width: `${10 + (pointCount / points.length) * 30}px`,
-                      height: `${10 + (pointCount / points.length) * 30}px`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      // backgroundColor: "red",
-                      backgroundColor: "#1EA896",
-                      color: "white",
-                      borderRadius: "50%",
-                      padding: "2px"
-                    }}
-                    onClick={() => {
-                      const expansion = Math.min(
-                        supercluster.getClusterExpansionZoom(cluster.id),
-                        20
-                      );
-                      setViewPort({
-                        ...viewport,
-                        latitude,
-                        longitude,
-                        zoom: expansion,
-                        transitionInterpolator: new FlyToInterpolator({
-                          speed: 2
-                        }),
-                        transitionDuration: "auto"
-                      });
-                    }}
-                  >
-                    {pointCount}
-                  </div>
-                </Marker>
-              );
-            }
-            return (
-              <Marker
-                key={cluster.properties.place_id}
-                longitude={longitude}
-                latitude={latitude}
+            <Row>
+              <TextInput
+                label="Source"
+                value={source.place}
+                onChange={e => setSource({ ...source, place: e.target.value })}
+                className="red-text"
+              />
+            </Row>
+            <Row>
+              <TextInput
+                label="Latitude"
+                type="number"
+                value={source.latitude}
+                onChange={e =>
+                  setSource({
+                    ...source,
+                    latitude: Number(e.target.value.toFixed(7))
+                  })
+                }
+              />
+            </Row>
+            <Row>
+              <TextInput
+                label="Longitude"
+                type="number"
+                value={source.longitude}
+                onChange={e =>
+                  setSource({
+                    ...source,
+                    longitude: Number(e.target.value.toFixed(7))
+                  })
+                }
+              />
+            </Row>
+            <Row>
+              <Textarea
+                label="Summary"
+                value={source.summary}
+                onChange={e =>
+                  setSource({ ...source, summary: e.target.value })
+                }
+              />
+            </Row>
+            <Row>
+              <TextInput
+                label="File"
+                type="file"
+                // value={source.place_img == "" ? "" : source.place_img.name}
+                onChange={e =>
+                  setSource({ ...source, place_img: e.target.files[0] })
+                }
+              />
+            </Row>
+            <Row>
+              <Button
+                node="button"
+                waves="light"
+                onClick={submitData}
+                className="submitBut"
               >
-                <div
-                  style={{
-                    // border: "thin solid black",
-                    position: "relative",
-                    height: "20px",
-                    width: "20px"
-                  }}
-                  onClick={() => {
-                    console.log(cluster.properties);
-                    setPopupInfo({
-                      ...cluster.properties,
-                      latitude: latitude,
-                      longitude: longitude
-                    });
-                  }}
-                >
-                  <FontAwesomeIcon
-                    icon={faMapMarkerAlt}
-                    color={"red"}
-                    size={"lg"}
-                    style={{
-                      bottom: "50%",
-                      right: "50%",
-                      position: "relative"
-                    }}
-                  />
+                Add
+                <Icon right>send</Icon>
+              </Button>
+            </Row>
+          </Col>
+          <Col s={12} m={8}>
+            <Row>
+              <MapGL
+                {...viewport}
+                // transitionInterpolator={new FlyToInterpolator({ speed: 4 })}
+                // transitionDuration="auto"
+                mapboxApiAccessToken={TOKEN}
+                mapStyle="mapbox://styles/b30wulffz/ck77ua3ax0yt81ioers9qxmn0"
+                onViewportChange={_onViewportChange}
+                maxZoom={20}
+                style={{ position: "relative" }}
+                onClick={e => {
+                  getCoordinates(e);
+                }}
+                ref={mapRef}
+              >
+                <GeolocateControl
+                  style={geolocateStyle}
+                  positionOptions={{ enableHighAccuracy: true }}
+                  trackUserLocation={true}
+                />
+                <div style={{ position: "absolute", right: 0, margin: "20px" }}>
+                  <NavigationControl showCompass={false} />
                 </div>
-              </Marker>
-            );
-          })}
-          {popupInfo && (
-            <Popup
-              tipSize={5}
-              anchor="bottom"
-              longitude={popupInfo.longitude}
-              latitude={popupInfo.latitude}
-              closeOnClick={false}
-              onClose={() => setPopupInfo(null)}
-            >
-              <LocDetails {...popupInfo} />
-            </Popup>
-          )}
-          {/* <Geocoder
+
+                {clusters.map(cluster => {
+                  const [longitude, latitude] = cluster.geometry.coordinates;
+                  const {
+                    cluster: isCluster,
+                    point_count: pointCount
+                  } = cluster.properties;
+
+                  if (isCluster) {
+                    return (
+                      <Marker
+                        key={cluster.id}
+                        latitude={latitude}
+                        longitude={longitude}
+                      >
+                        <div
+                          style={{
+                            width: `${10 +
+                              (pointCount / points.length) * 30}px`,
+                            height: `${10 +
+                              (pointCount / points.length) * 30}px`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            // backgroundColor: "red",
+                            backgroundColor: "#1EA896",
+                            color: "white",
+                            borderRadius: "50%",
+                            padding: "2px"
+                          }}
+                          onClick={() => {
+                            const expansion = Math.min(
+                              supercluster.getClusterExpansionZoom(cluster.id),
+                              20
+                            );
+                            setViewPort({
+                              ...viewport,
+                              latitude,
+                              longitude,
+                              zoom: expansion,
+                              transitionInterpolator: new FlyToInterpolator({
+                                speed: 2
+                              }),
+                              transitionDuration: "auto"
+                            });
+                          }}
+                        >
+                          {pointCount}
+                        </div>
+                      </Marker>
+                    );
+                  }
+                  return (
+                    <Marker
+                      key={cluster.properties.place_id}
+                      longitude={longitude}
+                      latitude={latitude}
+                    >
+                      <div
+                        style={{
+                          // border: "thin solid black",
+                          position: "relative",
+                          height: "20px",
+                          width: "20px"
+                        }}
+                        onClick={() => {
+                          console.log(cluster.properties);
+                          setPopupInfo({
+                            ...cluster.properties,
+                            latitude: latitude,
+                            longitude: longitude
+                          });
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faMapMarkerAlt}
+                          color={"red"}
+                          size={"lg"}
+                          style={{
+                            bottom: "50%",
+                            right: "50%",
+                            position: "relative"
+                          }}
+                        />
+                      </div>
+                    </Marker>
+                  );
+                })}
+                {popupInfo && (
+                  <Popup
+                    tipSize={5}
+                    anchor="bottom"
+                    longitude={popupInfo.longitude}
+                    latitude={popupInfo.latitude}
+                    closeOnClick={false}
+                    onClose={() => setPopupInfo(null)}
+                  >
+                    <LocDetails {...popupInfo} />
+                  </Popup>
+                )}
+                {/* <Geocoder
             mapRef={mapRef}
             // onViewportChange={handleGeocoderViewportChange}
             mapboxApiAccessToken={TOKEN}
@@ -415,7 +440,7 @@ const Map = () => {
             hideOnSelect={true}
             queryParams={{ country: "in" }}
           /> */}
-          {/* 
+                {/* 
         <Marker
           longitude={userLocation.longitude}
           latitude={userLocation.latitude}
@@ -437,10 +462,39 @@ const Map = () => {
             />
           </div>
         </Marker> */}
-        </MapGL>
-      </Col>
-    </Row>
-    // </CardPanel>
+              </MapGL>
+            </Row>
+            {err ? (
+              <Row>
+                <FadeIn>
+                  <Card
+                    title="Error"
+                    className="red white-text"
+                    style={{ width: "100%" }}
+                  >
+                    Not Uploaded!
+                  </Card>
+                </FadeIn>
+              </Row>
+            ) : null}
+
+            {success ? (
+              <Row>
+                <FadeIn>
+                  <Card
+                    title="Success"
+                    className="green white-text"
+                    style={{ width: "100%" }}
+                  >
+                    Location Added Successfully!
+                  </Card>
+                </FadeIn>
+              </Row>
+            ) : null}
+          </Col>
+        </Row>
+      </Row>
+    </CardPanel>
     // </div>
   );
 };
