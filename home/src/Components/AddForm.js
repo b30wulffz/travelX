@@ -247,7 +247,6 @@ const Map = () => {
                 label="Source"
                 value={source.place}
                 onChange={e => setSource({ ...source, place: e.target.value })}
-                className="red-text"
               />
             </Row>
             <Row>
