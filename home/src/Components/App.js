@@ -7,14 +7,17 @@ import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
 import Anime from "react-anime";
 
 import HomePage from "./HomePage";
-import AddForm from "./AddForm";
-import AddRoute from "./AddRoute";
+import AddForm from "./AddForm2";
+import AddRoute from "./AddRoute2";
 
 // import * as cuteLoader from "../../assets/loader/1016-spirit-geek.json";
 import * as cuteLoader from "../../assets/loader/11422-travel-icons-map.json";
 // import * as cuteLoader from "../../assets/loader/11562-van-icon.json";
 import Form from "./AddForm";
-import SearchForm from "./SearchForm";
+import SearchForm from "./SearchForm2";
+
+import theme from "./theme";
+import { ThemeProvider } from "@material-ui/styles";
 
 // const Example = ({ type, color }) => (
 //   <ReactLoading type={type} color={color} height={667} width={375} />
@@ -25,14 +28,14 @@ const defaultOptions = {
   autoplay: true,
   animationData: cuteLoader.default,
   rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice"
-  }
+    preserveAspectRatio: "xMidYMid slice",
+  },
 };
 
 const App = () => {
   const [load, setLoad] = useState({
     loaded: false,
-    currClass: ""
+    currClass: "",
   });
 
   useEffect(() => {
@@ -154,5 +157,13 @@ const App = () => {
 };
 export default App;
 
+const ThemedApp = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  );
+};
+
 const container = document.getElementById("app");
-render(<App />, container);
+render(<ThemedApp />, container);

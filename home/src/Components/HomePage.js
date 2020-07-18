@@ -3,7 +3,9 @@ import ReactLoading from "react-loading";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import Anime from "react-anime";
-import { Icon } from "react-materialize";
+// import { Icon } from "react-materialize";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import { Icon } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
@@ -29,8 +31,11 @@ const HomePage = () => {
 
         <Link to="/search">
           <div className={"continue"}>
-            {/* Continue */}
-            <Icon size={50}>navigate_next</Icon>
+            Continue
+            {/* <Icon fontSize={20}>
+              <ChevronRightIcon />
+            </Icon> */}
+            {/* <Icon size={50}>navigate_next</Icon> */}
           </div>
         </Link>
       </div>

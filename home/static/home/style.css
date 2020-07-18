@@ -219,10 +219,10 @@ body {
 .cardContent {
   width: 90%;
   height: 80%;
-  overflow-y: scroll;
+  overflow-y: scroll !important;
   background-color: rgba(255, 255, 255, 0.8) !important;
 }
-
+/* 
 .cardContent .file-path {
   width: 230px !important;
 }
@@ -236,4 +236,18 @@ body {
   width: 320px;
   height: 50px;
   box-sizing: border-box;
+} */
+
+.MuiCard-root {
+  overflow-y: auto !important;
+}
+
+.MuiFormControl-root {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .map {
+    height: 30vh !important;
+  }
 }
