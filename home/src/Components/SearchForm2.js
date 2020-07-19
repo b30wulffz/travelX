@@ -215,13 +215,20 @@ const SearchForm = () => {
     return (
       <>
         <Card elevation={3} className="cardContent">
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="column" alignItems="stretch">
             <Grid item xs={12}>
               <Typography variant="h4" className="pageHeading">
                 Get The Price
               </Typography>
             </Grid>
-            <Grid container item xs={12} direction="row-reverse" spacing={3}>
+            <Grid
+              container
+              item
+              xs={12}
+              direction="row-reverse"
+              spacing={3}
+              justify="center"
+            >
               <Grid container item xs={12} md={8} spacing={3}>
                 <Grid item xs={12}>
                   <MapGL
@@ -269,37 +276,39 @@ const SearchForm = () => {
                 ) : null}
               </Grid>
 
-              <Grid container item xs={12} md={4} spacing={4}>
-                <Grid item xs={12}>
-                  <MyAutoComplete
-                    options={locations}
-                    value={src}
-                    onChange={(event, newValue) => {
-                      setSrc(newValue);
-                    }}
-                    label="Source"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <MyAutoComplete
-                    options={locations}
-                    value={dest}
-                    onChange={(event, newValue) => {
-                      setDest(newValue);
-                    }}
-                    label="Destination"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    onClick={submitData}
-                    endIcon={<SendIcon />}
-                    variant="contained"
-                    color="primary"
-                    className={classes.expandButton}
-                  >
-                    Search
-                  </Button>
+              <Grid item xs={12} md={4}>
+                <Grid container spacing={4}>
+                  <Grid item xs={12}>
+                    <MyAutoComplete
+                      options={locations}
+                      value={src}
+                      onChange={(event, newValue) => {
+                        setSrc(newValue);
+                      }}
+                      label="Source"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <MyAutoComplete
+                      options={locations}
+                      value={dest}
+                      onChange={(event, newValue) => {
+                        setDest(newValue);
+                      }}
+                      label="Destination"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      onClick={submitData}
+                      endIcon={<SendIcon />}
+                      variant="contained"
+                      color="primary"
+                      className={classes.expandButton}
+                    >
+                      Search
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

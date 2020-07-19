@@ -3,7 +3,13 @@ import { render } from "react-dom";
 // import ReactLoading from "react-loading";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
-import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  NavLink,
+  useHistory,
+} from "react-router-dom";
 import Anime from "react-anime";
 
 import HomePage from "./HomePage";
@@ -18,6 +24,25 @@ import SearchForm from "./SearchForm2";
 
 import theme from "./theme";
 import { ThemeProvider } from "@material-ui/styles";
+import {
+  Typography,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  ListItemIcon,
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+
+import HomeIcon from "@material-ui/icons/Home";
+import SearchIcon from "@material-ui/icons/Search";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import AddIcon from "@material-ui/icons/Add";
 
 // const Example = ({ type, color }) => (
 //   <ReactLoading type={type} color={color} height={667} width={375} />
@@ -32,11 +57,58 @@ const defaultOptions = {
   },
 };
 
+const CustomDrawer = (props) => {
+  const history = useHistory();
+
+  const handleNavClick = (path) => {
+    history.push(path);
+  };
+  return (
+    <Drawer
+      anchor="bottom"
+      open={props.drawer}
+      onClose={() => props.setDrawer(false)}
+    >
+      <List
+        onClick={() => props.setDrawer(false)}
+        onKeyDown={() => props.setDrawer(false)}
+      >
+        <ListItem button onClick={() => handleNavClick("/")}>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Home"} />
+        </ListItem>
+        <ListItem button onClick={() => handleNavClick("/search")}>
+          <ListItemIcon>
+            <SearchIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Search"} />
+        </ListItem>
+        <ListItem button onClick={() => handleNavClick("/add")}>
+          <ListItemIcon>
+            <LocationOnIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Add Location"} />
+        </ListItem>
+        <ListItem button onClick={() => handleNavClick("/addRoute")}>
+          <ListItemIcon>
+            <AddIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Add Routes"} />
+        </ListItem>
+      </List>
+    </Drawer>
+  );
+};
+
 const App = () => {
   const [load, setLoad] = useState({
     loaded: false,
     currClass: "",
   });
+
+  const [drawer, setDrawer] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -56,20 +128,35 @@ const App = () => {
   ) : (
     <BrowserRouter>
       <div className="homePage">
-        <div className="navBar">
-          <NavLink to="/" exact activeClassName="selectedTab">
-            Home
-          </NavLink>
-          <NavLink to="/search" exact activeClassName="selectedTab">
-            Search
-          </NavLink>
-          <NavLink to="/add" exact activeClassName="selectedTab">
-            Add Location
-          </NavLink>
-          <NavLink to="/addRoute" exact activeClassName="selectedTab">
-            Add Routes
-          </NavLink>
-        </div>
+        <Box display={{ xs: "block", md: "none" }}>
+          <AppBar variant="secondary" position="fixed" color="secondary">
+            <Toolbar>
+              <IconButton edge="start" onClick={() => setDrawer(true)}>
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap align="center">
+                TravelX
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <CustomDrawer drawer={drawer} setDrawer={setDrawer} />
+        </Box>
+        <Box display={{ xs: "none", md: "block" }} flex={1}>
+          <div className="navBar">
+            <NavLink to="/" exact activeClassName="selectedTab">
+              <Typography variant="body1">Home</Typography>
+            </NavLink>
+            <NavLink to="/search" exact activeClassName="selectedTab">
+              <Typography variant="body1">Search</Typography>
+            </NavLink>
+            <NavLink to="/add" exact activeClassName="selectedTab">
+              <Typography variant="body1">Add Location</Typography>
+            </NavLink>
+            <NavLink to="/addRoute" exact activeClassName="selectedTab">
+              <Typography variant="body1">Add Routes</Typography>
+            </NavLink>
+          </div>
+        </Box>
         <div className="showPage">
           <Switch>
             <Route exact path="/">

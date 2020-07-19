@@ -31,10 +31,8 @@ const HomePage = () => {
 
         <Link to="/search">
           <div className={"continue"}>
-            Continue
-            {/* <Icon fontSize={20}>
-              <ChevronRightIcon />
-            </Icon> */}
+            {/* Continue */}
+            <ChevronRightIcon />
             {/* <Icon size={50}>navigate_next</Icon> */}
           </div>
         </Link>

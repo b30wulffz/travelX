@@ -102,11 +102,13 @@ body {
   /* color: crimson; */
   color: #1fa2ff;
   transition: 100ms ease-in;
-  font-size: 1.2rem;
   width: 150px;
   padding: 10px;
   text-align: center;
   border-radius: 5px;
+}
+.navBar p {
+  font-size: 1.22rem;
 }
 .navBar a:hover {
   /* font-size: 1.3rem; */
@@ -158,6 +160,7 @@ body {
   font-size: 72px;
   color: #1fa2ff;
   margin-top: auto;
+  text-align: center;
 }
 
 .home > .tagline {
@@ -176,6 +179,7 @@ body {
   /* display: flex;
   align-items: center; */
   border: 1px solid #1fa2ff;
+  color: #1fa2ff;
   border-radius: 30px;
   padding: 0 50px;
   transition: 200ms ease-in;
@@ -247,7 +251,16 @@ body {
 }
 
 @media (max-width: 768px) {
-  .map {
+  /* .map {
     height: 30vh !important;
+  } */
+  .home > .title,
+  .errorTitle,
+  .logo {
+    font-size: 3rem;
   }
+}
+
+a {
+  text-decoration: none !important;
 }
