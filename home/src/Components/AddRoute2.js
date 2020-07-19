@@ -184,13 +184,13 @@ const AddRoute = () => {
       <>
         <Card elevation={3} className="cardContent">
           <Grid container spacing={3}>
-            <Grid item xs={12}>
+            <Grid item xs={12} className="pageHeadingBlock">
               <Typography variant="h4" className="pageHeading">
                 Add New Routes
               </Typography>
             </Grid>
-            <Grid container item xs={12} direction="row-reverse" spacing={3}>
-              <Grid item xs={12} md={8}>
+            <Grid container item xs={12} direction="row-reverse">
+              <Grid item xs={12} md={8} className="section2">
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <MuiAlert severity="info">
@@ -206,7 +206,7 @@ const AddRoute = () => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid container item xs={12} md={4} spacing={4}>
+              <Grid container item xs={12} md={4} className="section1">
                 <Grid item xs={12}>
                   <MyAutoComplete
                     options={locations}

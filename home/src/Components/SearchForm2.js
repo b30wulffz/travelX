@@ -6,10 +6,15 @@ import {
   Button,
   Typography,
   Snackbar,
+  CardContent,
+  Box,
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import MyAutoComplete from "./MyAutoComplete";
 import SendIcon from "@material-ui/icons/Send";
+import LocalTaxiIcon from "@material-ui/icons/LocalTaxi";
+import DirectionsBusIcon from "@material-ui/icons/DirectionsBus";
+import TrainIcon from "@material-ui/icons/Train";
 
 import axios from "axios";
 import FadeIn from "react-fade-in";
@@ -31,6 +36,27 @@ import ReactLoading from "react-loading";
 const useStyles = makeStyles((theme) => ({
   expandButton: {
     width: "100%",
+  },
+  item2: {
+    order: 3,
+    [theme.breakpoints.up("md")]: {
+      order: 2,
+    },
+  },
+  item3: {
+    order: 2,
+    [theme.breakpoints.up("md")]: {
+      order: 3,
+    },
+  },
+  costCard: {
+    background: theme.palette.primary.light,
+    color: "#fff",
+
+    [theme.breakpoints.up("md")]: {
+      marginTop: "16px",
+      marginBottom: "16px",
+    },
   },
 }));
 
@@ -216,20 +242,13 @@ const SearchForm = () => {
       <>
         <Card elevation={3} className="cardContent">
           <Grid container spacing={3} direction="column" alignItems="stretch">
-            <Grid item xs={12}>
+            <Grid item xs={12} className="pageHeadingBlock">
               <Typography variant="h4" className="pageHeading">
                 Get The Price
               </Typography>
             </Grid>
-            <Grid
-              container
-              item
-              xs={12}
-              direction="row-reverse"
-              spacing={3}
-              justify="center"
-            >
-              <Grid container item xs={12} md={8} spacing={3}>
+            <Grid container item xs={12} direction="row-reverse">
+              <Grid container item xs={12} md={8} className="section2">
                 <Grid item xs={12}>
                   <MapGL
                     {...viewport}
@@ -259,56 +278,126 @@ const SearchForm = () => {
                     </div>
                   </MapGL>
                 </Grid>
-                {trans && !notFound ? (
-                  <FadeIn>
-                    <Grid container item xs={12}>
-                      <Grid item xs={4}>
-                        Auto: Rs. {trans.autoPrice}
-                      </Grid>
-                      <Grid item xs={4}>
-                        Bus: Rs. {trans.busPrice}
-                      </Grid>
-                      <Grid item xs={4}>
-                        Train: Rs. {trans.trainPrice}
-                      </Grid>
-                    </Grid>
-                  </FadeIn>
-                ) : null}
               </Grid>
 
+              {/*
+      To Do: fix responsiveness
+*/}
               <Grid item xs={12} md={4}>
                 <Grid container spacing={4}>
-                  <Grid item xs={12}>
-                    <MyAutoComplete
-                      options={locations}
-                      value={src}
-                      onChange={(event, newValue) => {
-                        setSrc(newValue);
-                      }}
-                      label="Source"
-                    />
+                  <Grid container item xs className={`${classes.item2}`}>
+                    {/* <Box clone order={{ xs: 3, sm: 2 }}> */}
+                    <Grid item xs={12}>
+                      <MyAutoComplete
+                        options={locations}
+                        value={src}
+                        onChange={(event, newValue) => {
+                          setSrc(newValue);
+                        }}
+                        label="Source"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <MyAutoComplete
+                        options={locations}
+                        value={dest}
+                        onChange={(event, newValue) => {
+                          setDest(newValue);
+                        }}
+                        label="Destination"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button
+                        onClick={submitData}
+                        endIcon={<SendIcon />}
+                        variant="contained"
+                        color="primary"
+                        className={classes.expandButton}
+                      >
+                        Search
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12}>
-                    <MyAutoComplete
-                      options={locations}
-                      value={dest}
-                      onChange={(event, newValue) => {
-                        setDest(newValue);
-                      }}
-                      label="Destination"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Button
-                      onClick={submitData}
-                      endIcon={<SendIcon />}
-                      variant="contained"
-                      color="primary"
-                      className={classes.expandButton}
-                    >
-                      Search
-                    </Button>
-                  </Grid>
+                  {trans && !notFound ? (
+                    <Grid container item xs={12} className={classes.item3}>
+                      <Grid item xs={4} md={12}>
+                        <FadeIn>
+                          <Card className={classes.costCard}>
+                            <CardContent>
+                              <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                              >
+                                <Grid item>
+                                  <LocalTaxiIcon />
+                                </Grid>
+                                <Grid item>
+                                  <Typography variant="h6">Auto</Typography>
+                                </Grid>
+                                <Grid item>
+                                  <Typography noWrap>
+                                    Rs. {trans.autoPrice}
+                                  </Typography>
+                                </Grid>
+                              </Grid>
+                            </CardContent>
+                          </Card>
+                        </FadeIn>
+                      </Grid>
+                      <Grid item xs={4} md={12}>
+                        <FadeIn>
+                          <Card className={classes.costCard}>
+                            <CardContent>
+                              <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                              >
+                                <Grid item>
+                                  <DirectionsBusIcon />
+                                </Grid>
+                                <Grid item>
+                                  <Typography variant="h6">Bus</Typography>
+                                </Grid>
+                                <Grid item>
+                                  <Typography noWrap>
+                                    Rs. {trans.busPrice}
+                                  </Typography>
+                                </Grid>
+                              </Grid>
+                            </CardContent>
+                          </Card>
+                        </FadeIn>
+                      </Grid>
+                      <Grid item xs={4} md={12}>
+                        <FadeIn>
+                          <Card className={classes.costCard}>
+                            <CardContent>
+                              <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                              >
+                                <Grid item>
+                                  <TrainIcon />
+                                </Grid>
+                                <Grid item>
+                                  <Typography variant="h6">Train</Typography>
+                                </Grid>
+                                <Grid item>
+                                  <Typography noWrap>
+                                    Rs. {trans.trainPrice}
+                                  </Typography>
+                                </Grid>
+                              </Grid>
+                            </CardContent>
+                          </Card>
+                        </FadeIn>
+                      </Grid>
+                    </Grid>
+                  ) : null}
                 </Grid>
               </Grid>
             </Grid>

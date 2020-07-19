@@ -226,14 +226,14 @@ const Map = () => {
     <>
       <Card elevation={3} className="cardContent">
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+          <Grid item xs={12} className="pageHeadingBlock">
             <Typography variant="h4" className="pageHeading">
               Add New Location
             </Typography>
             {/* <h3 className="pageHeading">Add New Location</h3> */}
           </Grid>
-          <Grid container item xs={12} direction="row-reverse" spacing={3}>
-            <Grid item xs={12} md={8}>
+          <Grid container item xs={12} direction="row-reverse">
+            <Grid item xs={12} md={8} className="section2">
               <MapGL
                 {...viewport}
                 // transitionInterpolator={new FlyToInterpolator({ speed: 4 })}
@@ -392,7 +392,7 @@ const Map = () => {
         </Marker> */}
               </MapGL>
             </Grid>
-            <Grid container item xs={12} md={4} spacing={4}>
+            <Grid container item xs={12} md={4} className="section1">
               <Grid item xs={12}>
                 <TextField
                   label="Source"

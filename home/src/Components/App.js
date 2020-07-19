@@ -9,6 +9,7 @@ import {
   Route,
   NavLink,
   useHistory,
+  useLocation,
 } from "react-router-dom";
 import Anime from "react-anime";
 
@@ -36,6 +37,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   ListItemIcon,
+  makeStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
@@ -47,6 +49,19 @@ import AddIcon from "@material-ui/icons/Add";
 // const Example = ({ type, color }) => (
 //   <ReactLoading type={type} color={color} height={667} width={375} />
 // );
+
+const useStyles = makeStyles((theme) => ({
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+}));
 
 const defaultOptions = {
   loop: true,
@@ -102,13 +117,48 @@ const CustomDrawer = (props) => {
   );
 };
 
+const CustomAppBar = () => {
+  let location = useLocation();
+
+  const [activePage, setActivePage] = useState("TravelX");
+  React.useEffect(() => {
+    const path = location.pathname;
+    if (path === "/add" || path === "/add/") {
+      setActivePage("Add New Location");
+    } else if (path === "/addRoute" || path === "/addRoute/") {
+      setActivePage("Add New Route");
+    } else if (path === "/search" || path === "/search/") {
+      setActivePage("Get The Price");
+    } else {
+      setActivePage("TravelX");
+    }
+  }, [location]);
+
+  const [drawer, setDrawer] = useState(false);
+  return (
+    <>
+      <AppBar variant="secondary" position="fixed" color="primary">
+        <Toolbar>
+          <IconButton edge="start" onClick={() => setDrawer(true)}>
+            <MenuIcon style={{ color: "#fff" }} />
+          </IconButton>
+          <Typography variant="h6" noWrap align="center">
+            {activePage}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <CustomDrawer drawer={drawer} setDrawer={setDrawer} />
+    </>
+  );
+};
+
 const App = () => {
+  const classes = useStyles();
+
   const [load, setLoad] = useState({
     loaded: false,
     currClass: "",
   });
-
-  const [drawer, setDrawer] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -129,17 +179,7 @@ const App = () => {
     <BrowserRouter>
       <div className="homePage">
         <Box display={{ xs: "block", md: "none" }}>
-          <AppBar variant="secondary" position="fixed" color="secondary">
-            <Toolbar>
-              <IconButton edge="start" onClick={() => setDrawer(true)}>
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" noWrap align="center">
-                TravelX
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <CustomDrawer drawer={drawer} setDrawer={setDrawer} />
+          <CustomAppBar />
         </Box>
         <Box display={{ xs: "none", md: "block" }} flex={1}>
           <div className="navBar">
@@ -158,6 +198,7 @@ const App = () => {
           </div>
         </Box>
         <div className="showPage">
+          <div className={classes.drawerHeader} />
           <Switch>
             <Route exact path="/">
               {/* <div className={"home " + load.currClass}> */}
