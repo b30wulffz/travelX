@@ -14,14 +14,13 @@ import {
 import Anime from "react-anime";
 
 import HomePage from "./HomePage";
-import AddForm from "./AddForm2";
-import AddRoute from "./AddRoute2";
+import AddLocation from "./AddLocation";
+import AddRoute from "./AddRoute";
+import SearchForm from "./SearchForm";
 
 // import * as cuteLoader from "../../assets/loader/1016-spirit-geek.json";
 import * as cuteLoader from "../../assets/loader/11422-travel-icons-map.json";
 // import * as cuteLoader from "../../assets/loader/11562-van-icon.json";
-import Form from "./AddForm";
-import SearchForm from "./SearchForm2";
 
 import theme from "./theme";
 import { ThemeProvider } from "@material-ui/styles";
@@ -231,7 +230,7 @@ const App = () => {
               {/* <Anime opacity={[0, 1]} duration={2000}> */}
               {/* <FadeIn> */}
               {/* <div> */}
-              <AddForm />
+              <AddLocation />
               {/* </div> */}
               {/* </FadeIn> */}
               {/* </Anime> */}
