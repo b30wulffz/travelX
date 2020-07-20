@@ -24,8 +24,10 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.8",
-    "@material-ui/core": "^4.9.7",
+    "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "autosuggest-highlight": "^3.1.1",
     "axios": "^0.19.2",
     "react-anime": "^3.0.3",
     "react-fade-in": "^0.1.8",
@@ -33,7 +35,6 @@
     "react-lottie": "^1.2.3",
     "react-map-gl": "^5.2.3",
     "react-mapbox-gl-geocoder": "^1.1.0",
-    "react-materialize": "^3.5.9",
     "react-router-dom": "^5.1.2",
     "use-supercluster": "^0.2.5"
   }

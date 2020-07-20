@@ -102,11 +102,13 @@ body {
   /* color: crimson; */
   color: #1fa2ff;
   transition: 100ms ease-in;
-  font-size: 1.2rem;
   width: 150px;
   padding: 10px;
   text-align: center;
   border-radius: 5px;
+}
+.navBar p {
+  font-size: 1.22rem;
 }
 .navBar a:hover {
   /* font-size: 1.3rem; */
@@ -124,6 +126,7 @@ body {
   /*width: 100%;*/
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   /* margin-top: auto;
   margin-bottom: auto; */
   height: 100vh;
@@ -158,6 +161,7 @@ body {
   font-size: 72px;
   color: #1fa2ff;
   margin-top: auto;
+  text-align: center;
 }
 
 .home > .tagline {
@@ -176,6 +180,7 @@ body {
   /* display: flex;
   align-items: center; */
   border: 1px solid #1fa2ff;
+  color: #1fa2ff;
   border-radius: 30px;
   padding: 0 50px;
   transition: 200ms ease-in;
@@ -219,10 +224,10 @@ body {
 .cardContent {
   width: 90%;
   height: 80%;
-  overflow-y: scroll;
+  overflow-y: scroll !important;
   background-color: rgba(255, 255, 255, 0.8) !important;
 }
-
+/* 
 .cardContent .file-path {
   width: 230px !important;
 }
@@ -236,4 +241,55 @@ body {
   width: 320px;
   height: 50px;
   box-sizing: border-box;
+} */
+
+.MuiCard-root {
+  overflow-y: auto !important;
+}
+
+.MuiFormControl-root {
+  width: 100%;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.section1,
+.section2 {
+  padding: 0 1.5rem !important;
+}
+
+.section1 > *,
+.subsection2 > * {
+  padding: 1.1rem 0 !important;
+}
+.section1 > *:first-child,
+.subsection2 > *:first-child {
+  padding: 0 0 1.1rem !important;
+}
+
+@media (max-width: 959px) {
+  .home > .title,
+  .errorTitle,
+  .logo {
+    font-size: 3rem;
+  }
+
+  .pageHeadingBlock {
+    display: none;
+  }
+
+  .section2 {
+    padding: 0 !important;
+  }
+
+  .section1 > *:first-child,
+  .subsection2 > *:first-child {
+    padding: 1.1rem 0 !important;
+  }
+
+  .cardContent {
+    height: 85%;
+  }
 }
