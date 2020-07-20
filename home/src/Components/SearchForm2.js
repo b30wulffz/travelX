@@ -248,44 +248,44 @@ const SearchForm = () => {
               </Typography>
             </Grid>
             <Grid container item xs={12} direction="row-reverse">
-              <Grid container item xs={12} md={8} className="section2">
-                <Grid item xs={12}>
-                  <MapGL
-                    {...viewport}
-                    // transitionInterpolator={new FlyToInterpolator({ speed: 4 })}
-                    // transitionDuration="auto"
-                    mapboxApiAccessToken={TOKEN}
-                    mapStyle="mapbox://styles/b30wulffz/ck77ua3ax0yt81ioers9qxmn0"
-                    onViewportChange={_onViewportChange}
-                    maxZoom={20}
-                    style={{ position: "relative" }}
-                    // onClick={e => {
-                    //   getCoordinates(e);
-                    // }}
-                    ref={mapRef}
-                    className="map"
+              <Grid item xs={12} md={8} className="section2">
+                <MapGL
+                  {...viewport}
+                  // transitionInterpolator={new FlyToInterpolator({ speed: 4 })}
+                  // transitionDuration="auto"
+                  mapboxApiAccessToken={TOKEN}
+                  mapStyle="mapbox://styles/b30wulffz/ck77ua3ax0yt81ioers9qxmn0"
+                  onViewportChange={_onViewportChange}
+                  maxZoom={20}
+                  style={{ position: "relative" }}
+                  // onClick={e => {
+                  //   getCoordinates(e);
+                  // }}
+                  ref={mapRef}
+                  className="map"
+                >
+                  <PolyLineOverlay points={points} />
+                  <GeolocateControl
+                    style={geolocateStyle}
+                    positionOptions={{ enableHighAccuracy: true }}
+                    trackUserLocation={true}
+                  />
+                  <div
+                    style={{ position: "absolute", right: 0, margin: "20px" }}
                   >
-                    <PolyLineOverlay points={points} />
-                    <GeolocateControl
-                      style={geolocateStyle}
-                      positionOptions={{ enableHighAccuracy: true }}
-                      trackUserLocation={true}
-                    />
-                    <div
-                      style={{ position: "absolute", right: 0, margin: "20px" }}
-                    >
-                      <NavigationControl showCompass={false} />
-                    </div>
-                  </MapGL>
-                </Grid>
+                    <NavigationControl showCompass={false} />
+                  </div>
+                </MapGL>
               </Grid>
 
-              {/*
-      To Do: fix responsiveness
-*/}
-              <Grid item xs={12} md={4}>
-                <Grid container spacing={4}>
-                  <Grid container item xs className={`${classes.item2}`}>
+              <Grid item xs={12} md={4} className="section1">
+                <Grid container className="subSection1">
+                  <Grid
+                    container
+                    item
+                    xs
+                    className={`${classes.item2} subsection2`}
+                  >
                     {/* <Box clone order={{ xs: 3, sm: 2 }}> */}
                     <Grid item xs={12}>
                       <MyAutoComplete

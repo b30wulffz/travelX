@@ -260,17 +260,16 @@ a {
   padding: 0 1.5rem !important;
 }
 
-.section1 > * {
+.section1 > *,
+.subsection2 > * {
   padding: 1.1rem 0 !important;
 }
-.section1 > *:first-child {
+.section1 > *:first-child,
+.subsection2 > *:first-child {
   padding: 0 0 1.1rem !important;
 }
 
-/* .section1 {
-} */
-
-@media (max-width: 768px) {
+@media (max-width: 959px) {
   .home > .title,
   .errorTitle,
   .logo {
@@ -285,7 +284,12 @@ a {
     padding: 0 !important;
   }
 
-  .section1 > *:first-child {
+  .section1 > *:first-child,
+  .subsection2 > *:first-child {
     padding: 1.1rem 0 !important;
+  }
+
+  .cardContent {
+    height: 85%;
   }
 }
