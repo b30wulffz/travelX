@@ -1,6 +1,6 @@
 asgiref==3.2.3
 coverage==5.0.3
-Django==3.0.3
+Django==3.1.9
 django-six==1.0.4
 djangorestframework==3.11.0
 Pillow==7.0.0
